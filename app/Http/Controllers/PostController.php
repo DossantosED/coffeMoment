@@ -9,7 +9,6 @@ use App\Http\Requests\Validaciones;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Date;
 
 class PostController extends Controller
 {

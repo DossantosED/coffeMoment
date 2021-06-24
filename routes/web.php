@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,9 +25,7 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::post('/postDelete/{id}', [App\Http\Controllers\PostController::class, 'delete'])->name('postDelete');
 
-    Route::get('/profile', function () {
-        Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
-    });
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
 });
 
 
