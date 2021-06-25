@@ -60,8 +60,8 @@ $(document).ready(function() {
     })
 
     $(".banner-img").on("mouseover", function () {
-        if($('#editAvatar').css("opacity") == 0){
-            $('#editAvatar').css("opacity",1);
+        if($('#editAvatar').css("opacity") == 1){
+            $('#editAvatar').css("opacity",0);
         }
     })
 

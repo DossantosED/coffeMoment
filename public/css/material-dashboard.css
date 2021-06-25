@@ -11223,6 +11223,11 @@ form {
   cursor: pointer;
 }
 
+.card .avatar{
+  margin: -10px 340px -70px 5px;
+  height: 100px;
+}
+
 #editAvatar{
   position: relative;
   opacity: 0;
