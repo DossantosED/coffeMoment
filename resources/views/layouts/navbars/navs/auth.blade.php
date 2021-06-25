@@ -14,15 +14,17 @@
       <ul class="navbar-nav">
 
         <li class="nav-item">
-          <form class="navbar-form" action="#" method="POST">
-            <div class="input-group no-border">
-            <input type="text" value="" class="form-control" placeholder="Buscar">
-            <button type="submit" class="btn btn-white btn-round btn-just-icon">
-              <i class="material-icons">search</i>
-              <div class="ripple-container"></div>
-            </button>
-            </div>
-          </form>
+          <div id="search">
+            <form class="navbar-form" action="#" method="GET">
+              <span class="bmd-form-group"><div class="input-group no-border">
+              <input type="text" value="" class="form-control" placeholder="Buscar">
+              <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                <i class="material-icons">search</i>
+                <div class="ripple-container"></div>
+              </button>
+              </div></span>
+            </form>
+          </div>
         </li>
 
         <li class="nav-item">
@@ -32,14 +34,14 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <i class="material-icons">face</i> {{ Auth::user()->name }}
             <p class="d-lg-none d-md-block">
               {{ __('Account') }}
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-            <a class="dropdown-item" href="/profile">{{ __('Perfil') }}</a>
+            <a class="dropdown-item" href="/profile/{{ Auth::user()->name }}">{{ __('Perfil') }}</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Salir') }}</a>
           </div>

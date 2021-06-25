@@ -11170,10 +11170,74 @@ form {
 .navbar form .bmd-form-group {
   display: inline-block;
   padding-top: 0;
+  width: 20rem;
+}
+
+#search{
+  width: 25rem;
 }
 
 .navbar form .btn {
   margin-bottom: 0;
+}
+
+.btn-delete{
+  position: absolute !important;
+  top: 1rem;
+  right: 2rem;
+}
+
+.btn-edit{
+  position: absolute !important;
+  top: 1rem;
+  right: 4em;
+}
+
+.banner{
+  width: 100%;
+  height: 20rem;
+  top: 80px;
+  position: absolute;
+  text-align: center;
+  background: grey;
+  z-index: 2;
+}
+
+.banner-img{
+  width: 100%;
+  height: 19.8rem;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  position: absolute;
+  z-index: -1;
+  border: solid 2px white;
+}
+
+.avatar {
+  border-radius: 50%;
+  height: 200px;
+  margin: 170px 5px 20px 5px;
+  border: 5px solid white;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+#editAvatar{
+  position: relative;
+  opacity: 0;
+  top: 10rem;
+  left: -6rem;
+  cursor: pointer;
+}
+
+.swal2-timer-progress-bar {
+  width: 100%;
+  height: .25em;
+  background: #4caf50 !important;
+}
+.swal2-popup.swal2-toast {
+  box-shadow: 0 0 0.625em #932aad !important;
 }
 
 .form-control {
@@ -13946,25 +14010,25 @@ h2.title {
 .tooltip.bs-tooltip-top .arrow::before,
 .tooltip.bs-tooltip-auto[x-placement^="top"] .arrow::before,
 .tooltip.bs-tooltip-auto[x-placement^="top"] .arrow::before {
-  border-top-color: #fff;
+  border-top-color: #292929;
 }
 
 .tooltip.bs-tooltip-right .arrow::before,
 .tooltip.bs-tooltip-auto[x-placement^="right"] .arrow::before,
 .tooltip.bs-tooltip-auto[x-placement^="right"] .arrow::before {
-  border-right-color: #fff;
+  border-right-color: #292929;
 }
 
 .tooltip.bs-tooltip-left .arrow::before,
 .tooltip.bs-tooltip-auto[x-placement^="left"] .arrow::before,
 .tooltip.bs-tooltip-auto[x-placement^="left"] .arrow::before {
-  border-left-color: #fff;
+  border-left-color: #292929;
 }
 
 .tooltip.bs-tooltip-bottom .arrow::before,
 .tooltip.bs-tooltip-auto[x-placement^="bottom"] .arrow::before,
 .tooltip.bs-tooltip-auto[x-placement^="bottom"] .arrow::before {
-  border-bottom-color: #fff;
+  border-bottom-color: #292929;
 }
 
 .tooltip-inner {
@@ -13975,11 +14039,11 @@ h2.title {
 .popover,
 .tooltip-inner {
   line-height: 1.5em;
-  background: #fff;
+  background: #292929;
   border: none;
   border-radius: 3px;
   box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
-  color: #555;
+  color: rgb(241, 241, 241);
 }
 
 .popover {

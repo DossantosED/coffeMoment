@@ -21,11 +21,11 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::post('/postCreate', [App\Http\Controllers\PostController::class, 'create'])->name('postCreate');
 
-    Route::post('/postEdit', [App\Http\Controllers\PostController::class, 'edit'])->name('postEdit');
+    Route::post('/postEdit', [App\Http\Controllers\PostController::class, 'update'])->name('postEdit');
 
-    Route::post('/postDelete/{id}', [App\Http\Controllers\PostController::class, 'delete'])->name('postDelete');
+    Route::post('/postDelete', [App\Http\Controllers\PostController::class, 'delete'])->name('postDelete');
 
-    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
 });
 
 

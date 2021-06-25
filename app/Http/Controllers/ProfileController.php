@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -23,9 +22,9 @@ class ProfileController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index($user)
     {
-        $posts = Post::all()->where('author',Auth::user()->name);
+        $posts = Post::orderBy('created_at', 'DESC')->where('author',$user)->get();
         return view('users.index', ['posts' => $posts]);
     }
 
