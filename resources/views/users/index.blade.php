@@ -4,13 +4,14 @@
 <div class="banner col-lg-12 col-md-6 col-sm-8 ml-auto mr-auto">
     <img src="{{asset('img/faces/marc.jpg')}}" alt="Derek" class="avatar" id="avatar">
     <i class="material-icons btn btn-white btn-round btn-just-icon" id="editAvatar">edit</i>
-  <img src="{{asset('img/cover.jpg')}}" class="banner-img">
+    <img src="{{asset('img/cover.jpg')}}" class="banner-img">
 </div>
 <div class="container" style="height: auto;">
   <div class="align-items-center" style="margin-top: 25rem">
+    <input id="user" value="{{Crypt::encrypt($posts["user"])}}" hidden />
     @if(Auth::user()->name == $posts["user"])
       <div class="col-lg-6 col-md-6 col-sm-8 ml-auto mr-auto mb-5">
-        <form class="form" method="POST" action="/postCreate" id="postCreate">
+        <form class="form">
           @csrf
           <div class="card card-login card-hidden mb-3">
             <div class="card-header card-header-primary text-center">
@@ -38,7 +39,9 @@
               </div>
             </div>
             <div class="card-footer justify-content-center">
-              <button type="submit" class="btn btn-primary btn-link btn-lg"><i class="material-icons">send</i> {{ __('Publicar') }}</button>
+              <button type="button" class="btn btn-primary btn-link btn-lg" id="enviarPost">
+                <i class="material-icons">send</i> {{ __('Publicar') }}
+            </button>
             </div>
           </div>
         </form>
@@ -47,30 +50,28 @@
   @if(count($posts["posts"]) > 0)
     <hr class="bg-white">
     @if(Auth::user()->name == $posts["user"])
-      <h2 class="text-center">Tus publicaciones</h2>
+      <h2 class="text-center" id="title">Tus publicaciones</h2>
     @else
-      <h2 class="text-center">Publicaciones de {{$posts["user"]}}</h2>
+      <h2 class="text-center" id="title">Publicaciones de {{$posts["user"]}}</h2>
     @endif
   @else
-    <h2 class="text-center">No hay Publicaciones para mostrar</h2>
+    <h2 class="text-center" id="title">No hay Publicaciones para mostrar</h2>
   @endif
   @foreach($posts["posts"] as $p)
-    <div class="col-lg-6 col-md-6 col-sm-8 ml-auto mr-auto">
+    <div class="col-lg-6 col-md-6 col-sm-8 ml-auto mr-auto" id="{{"idPub-".$p->id}}">
       <div class="card card-login card-hidden mb-5">
         <div class="card-header card-header-primary text-center">
           <img src="{{asset('img/faces/marc.jpg')}}" class="avatar">
           <h4 class="card-title"><strong>{{$p->author}}</strong></h4>
           @if(Auth::user()->name == $p->author)
-            <form action="/postDelete" method="POST" id="formDelete{{$p->id}}">
+            <form>
               @csrf
-              <input name="idPost" value="{{Crypt::encrypt($p->id)}}" hidden>
-              <button type="submite" class="btn btn-white btn-round btn-just-icon btn-delete" data-placement="right" data-toggle="tooltip" title="Eliminar" data-target="{{$p->id}}"><span class="material-icons">delete</span></button>
+              <button type="button" class="btn btn-white btn-round btn-just-icon btn-delete" data-placement="right" data-toggle="tooltip" title="Eliminar" data-target="{{$p->id}}" data-id="{{Crypt::encrypt($p->id)}}"><span class="material-icons">delete</span></button>
             </form>
-            <form action="/postEdit" method="POST" id="formEdit{{$p->id}}">
+            <form>
               <input id="contentEdit{{$p->id}}" name="contentEdit{{$p->id}}" value="" hidden>
-              <input name="id" value="{{Crypt::encrypt($p->id)}}" hidden>
               @csrf
-              <button type="button" class="btn btn-white btn-round btn-just-icon btn-edit" data-placement="right" data-toggle="tooltip" title="Editar" data-target="{{$p->id}}"><span class="material-icons">edit</span></button>
+              <button type="button" class="btn btn-white btn-round btn-just-icon btn-edit" data-placement="right" data-toggle="tooltip" title="Editar" data-id="{{$p->id}}" data-idcifrado="{{Crypt::encrypt($p->id)}}"><span class="material-icons">edit</span></button>
             </form>
           @endif
 
@@ -102,7 +103,7 @@
           </div>
         </div>
         <div class="card-footer justify-content-center">
-          <button type="button" class="btn btn-primary btn-link btn-lg" id="btn-save{{$p->id}}" style="display: none"><i class="material-icons">send</i> {{ __('Guardar') }}</button>
+          <button type="button" class="btn btn-primary btn-link btn-lg btn-save" id="btn-save{{$p->id}}" data-id="{{$p->id}}" data-idcifrado="{{Crypt::encrypt($p->id)}}" style="display: none"><i class="material-icons">send</i> {{ __('Guardar') }}</button>
           <button type="button" class="btn btn-primary btn-link btn-lg"><i class="material-icons">favorite</i> {{ __('Me gusta') }}</button>
         </div>
       </div>

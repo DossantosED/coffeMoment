@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use App\Models\Post;
-use App\Http\Requests\Validaciones;
-use App\Http\Requests\ValidacionesUpdate;
+use App\Models\Api;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use stdClass;
 
 class PostController extends Controller
 {
@@ -22,64 +20,50 @@ class PostController extends Controller
 
     public function create(Request $request)
     {
-        $content = $request->content;
-        $created_at = new DateTime();
-        $validations = new Validaciones();
-        $updated_at = $created_at;
-
-
-        $validator = Validator::make($request->all(), $validations->rules(), $validations->messages());
-        if($validator->fails()){
-            return redirect()->back()->withErrors($validator)->withInput();
+        $api = new Api();
+        $send = new stdClass;
+        $send->content = $request->content;
+        $send->created_at = date("Y-m-d H:i:s");
+        $send->updated_at = $send->created_at;
+        $send->author = Auth::user()->name;
+        if(trim($request->content) != ""){
+            $response = $api->post($send);
+        }else{
+            return response()->json(['exito' => true, 'msg' => 'Escriba una publicacion'],500);
         }
-        $post = new Post();
-        $post->content = $content;
-        $post->author = Auth::user()->name;
-        $post->created_at = $created_at;
-        $post->updated_at = $updated_at;
-        $post->save();
-        sleep(1);
-        return redirect()->back();
-        
+        return $response->msg;
+    
     }
 
     public function update( Request $request)
     {
-        $validations = new ValidacionesUpdate();
+        $api = new Api();
+        $datos = new stdClass;
         $idPost = Crypt::decrypt($request->id);
-        $content = "contentEdit".$idPost;
-        $content = $request->$content;
         $created_at = new DateTime();
         $updated_at = $created_at;
-        $validator = Validator::make($request->all(), $validations->rules($idPost), $validations->messages());
-
-        if($validator->fails()){
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-        $post = Post::find($idPost);
-        if($post->author == Auth::user()->name){
-            $post->content = $content;
-            $post->created_at = $created_at;
-            $post->updated_at = $updated_at;
-            $post->save();
+        $datos->content = $request->content;
+        $datos->created_at = $created_at;
+        $datos->updated_at = $updated_at;
+        $datos->idPost = $idPost;
+        $datos->user = Auth::user()->name;
+        if(trim($request->content) != ""){
+            $response = $api->put($datos);
         }else{
-            return redirect()->back()->withErrors("Error desconocido");
+            return response()->json(['exito' => true, 'msg' => 'Escriba una publicacion'],500);
         }
-        sleep(1);
-        return redirect()->back();
+        return $response->msg;
     }
 
     public function delete( Request $request)
     {
-        $idPost = Crypt::decrypt($request->idPost);
-        $post = Post::find($idPost);
-        if($post->author == Auth::user()->name){
-            $post->delete();
-        }else{
-            return redirect()->back()->withErrors("Error desconocido");
-        }
-        sleep(1);
-        return redirect()->back();
+        $api = new Api();
+        $datos = new stdClass;
+        $idPost = Crypt::decrypt($request->id);
+        $datos->idPost = $idPost;
+        $datos->user = Auth::user()->name;
+        $response = $api->delete($datos);
+        return $response->msg;
 
     }
 }

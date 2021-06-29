@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Models\User;
+use App\Models\Api;
+use Illuminate\Support\Facades\Crypt;
 
 class ProfileController extends Controller
 {
@@ -25,16 +26,21 @@ class ProfileController extends Controller
 
     public function index($user)
     {
+        $posts = $this->getPosts(Crypt::encrypt($user));
+        $data = ['posts' => $posts->posts, 'user' => $user];
+        return view('users.index', ['posts' => $data]);
+    }
+
+    public function getPosts($user)
+    {
+        $api = new Api;
+        $user = Crypt::decrypt($user);
         if(User::where('name',$user)->get()->count() == 1){
-            $posts = Post::orderBy('created_at', 'DESC')->where('author',$user)->get();
+            $post = $api->get($user);
         }else{
             abort(404, 'Page not found');
         }
-        $data = [
-            'posts'  => $posts,
-            'user'   => $user
-        ];
-        return view('users.index', ['posts' => $data]);
+        return $post;
     }
 
 }

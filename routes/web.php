@@ -26,6 +26,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/postDelete', [App\Http\Controllers\PostController::class, 'delete'])->name('postDelete');
 
     Route::get('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+
+    Route::get('/getPosts/{user}', [App\Http\Controllers\ProfileController::class, 'getPosts'])->name('getPosts');
+
 });
 
 

@@ -10,6 +10,7 @@
   <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!-- CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link href="{{ asset('/css/material-dashboard.css') }}" rel="stylesheet" />
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -28,7 +29,6 @@
 
     <!--   Core JS Files   -->
     <script src="{{ asset('/js/core/jquery.min.js') }}"></script>
-    <script src="{{ asset('/js/main.js') }}"></script>
     <script src="{{ asset('/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('/js/plugins/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/core/bootstrap-material-design.min.js') }}"></script>
@@ -53,6 +53,8 @@
     <script src="{{ asset('/js/plugins/bootstrap-notify.js') }}"></script>
     <script src="{{ asset('/js/material-dashboard.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/js/settings.js') }}"></script>
+    <script src="{{ asset('/js/main.js') }}"></script>
+    <script src="{{ asset('/js/profile.js') }}"></script>
     @stack('js')
   </body>
 </html>
