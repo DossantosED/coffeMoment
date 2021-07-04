@@ -21,6 +21,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::post('/postCreate', [App\Http\Controllers\PostController::class, 'create'])->name('postCreate');
 
+    Route::post('/upload', [App\Http\Controllers\ProfileController::class, 'upload'])->name('upload');
+
     Route::post('/postEdit', [App\Http\Controllers\PostController::class, 'update'])->name('postEdit');
 
     Route::post('/postDelete', [App\Http\Controllers\PostController::class, 'delete'])->name('postDelete');

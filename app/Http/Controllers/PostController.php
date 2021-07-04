@@ -26,6 +26,16 @@ class PostController extends Controller
         $send->created_at = date("Y-m-d H:i:s");
         $send->updated_at = $send->created_at;
         $send->author = Auth::user()->name;
+        if($request->hasFile('file')){
+            if($_FILES["file"]["size"] > 10000000){
+                return response()->json(['exito' => true, 'msg' => 'La imagen supera los 1 MBs'],500);
+            }
+            if($_FILES["file"]["type"] != "image/jpeg" && $_FILES["file"]["type"] != "image/jpg" && $_FILES["file"]["type"] != "image/png"){
+                return response()->json(['exito' => true, 'msg' => 'El archivo no es una imagen'],500);
+            }
+            $send->image = $_FILES["file"]["name"];
+            $request->file('file')->move(public_path('/img/posts'), $_FILES["file"]["name"]); 
+        }
         if(trim($request->content) != ""){
             $response = $api->post($send);
         }else{

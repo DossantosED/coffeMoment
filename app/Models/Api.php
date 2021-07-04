@@ -15,7 +15,21 @@ class Api
             $client = new Client(
                 ['base_uri' => env('API_URL'), 'verify' => false]
             );
-            $request = $client->get("api/getPosts",['body' => json_encode($datos)]);
+            $request = $client->get("api/postByUser",['body' => json_encode($datos)]);
+            return json_decode($request->getBody()->getContents());
+        } catch (RequestException $e) {
+            return $e;
+        }
+
+    }
+
+    public function getPosts(){
+
+        try {
+            $client = new Client(
+                ['base_uri' => env('API_URL'), 'verify' => false]
+            );
+            $request = $client->get("api/getAllPosts");
             return json_decode($request->getBody()->getContents());
         } catch (RequestException $e) {
             return $e;
