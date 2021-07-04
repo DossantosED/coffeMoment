@@ -76,4 +76,14 @@ class PostController extends Controller
         return $response->msg;
 
     }
+
+    public function likePost( Request $request){
+        
+        $api = new Api();
+        $datos = new stdClass;
+        $datos->idPost = $request->id;
+        $datos->user = Auth::user()->id;
+        $response = $api->likePost($datos);
+        return $response->cant;
+    }
 }

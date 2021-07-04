@@ -62,9 +62,9 @@
         <div class="card card-login card-hidden mb-5">
           <div class="card-header card-header-primary text-center">
             @if($p->avatar)
-              <img src="{{asset('img/faces/'.$p->avatar)}}" class="avatar" width="100" height="100">
+              <a href="{{'profile/'.$p->author}}"><img src="{{asset('img/faces/'.$p->avatar)}}" class="avatar" width="100" height="100"></a>
             @else
-              <img src="{{asset('img/faces/marc.jpg')}}" class="avatar">
+            <a href="{{'profile/'.$p->author}}"><img src="{{asset('img/faces/marc.jpg')}}" class="avatar"></a>
             @endif
             <h3 class="card-title titleAutor"><strong>{{$p->author}}</strong></h3>
             @if(Auth::user()->name == $p->author)
@@ -109,7 +109,7 @@
           </div>
           <div class="card-footer justify-content-center">
             <button type="button" class="btn btn-primary btn-link btn-lg btn-save" id="btn-save{{$p->id}}" data-id="{{$p->id}}" data-idcifrado="{{Crypt::encrypt($p->id)}}" style="display: none"><i class="material-icons">send</i> {{ __('Guardar') }}</button>
-            <button type="button" class="btn btn-primary btn-link btn-lg"><i class="material-icons">favorite</i> {{ __('Me gusta') }}</button>
+            <button type="button" class="btn btn-primary btn-link btn-lg btn-like" data-id="{{$p->id}}"><i class="material-icons">favorite</i> <i>{{$p->likes }} {{ __('ME GUSTA') }}</i></button>
           </div>
         </div>
       </div>

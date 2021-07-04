@@ -146,7 +146,7 @@
           </div>
           <div class="card-footer justify-content-center">
             <button type="button" class="btn btn-primary btn-link btn-lg btn-save" id="btn-save{{$p->id}}" data-id="{{$p->id}}" data-idcifrado="{{Crypt::encrypt($p->id)}}" style="display: none"><i class="material-icons">send</i> {{ __('Guardar') }}</button>
-            <button type="button" class="btn btn-primary btn-link btn-lg"><i class="material-icons">favorite</i> {{ __('Me gusta') }}</button>
+            <button type="button" class="btn btn-primary btn-link btn-lg btn-like" data-id="{{$p->id}}"><i class="material-icons">favorite</i> <i>{{$p->likes }} {{ __('ME GUSTA') }}</i></button>
           </div>
         </div>
       </div>

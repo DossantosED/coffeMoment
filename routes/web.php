@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/getPosts/{user}', [App\Http\Controllers\ProfileController::class, 'getPosts'])->name('getPosts');
 
+    Route::post('/likePost', [App\Http\Controllers\PostController::class, 'likePost'])->name('likePost');
+
 });
 
 

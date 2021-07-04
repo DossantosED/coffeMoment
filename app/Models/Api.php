@@ -78,4 +78,17 @@ class Api
 
     }
 
+    public function likePost($datos){
+        try {
+            $client = new Client(
+                ['base_uri' => env('API_URL'), 'verify' => false]
+            );
+            $request = $client->post("api/likePost",['body' => json_encode($datos)]);
+            return json_decode($request->getBody()->getContents());
+        } catch (RequestException $e) {
+            return null;
+        }
+
+    }
+
 }

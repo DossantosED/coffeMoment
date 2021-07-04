@@ -236,3 +236,30 @@ function uploadImage(input, classNanme, isBanner){
     }
 }
 
+$(document).on("click",".btn-like", function(){
+    let idPost = $(this).data('id');
+    likePost(idPost);
+})
+
+function likePost(idPost){
+    $.ajax({
+        type: 'POST',
+        url: '/likePost',
+        data: {
+            id: idPost
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('input[name=_token]').val()
+        },
+        success: function (data) {
+            $("#idPub-"+idPost+ " > div > div.card-footer.justify-content-center > button.btn.btn-primary.btn-link.btn-lg.btn-like > i:nth-child(2)")[0].innerText = data+" ME GUSTA";
+        },
+        error: function () {
+            Toast2.fire({
+                icon: 'error',
+                title: 'error desconocido'
+            })
+        }
+    });
+}
+
