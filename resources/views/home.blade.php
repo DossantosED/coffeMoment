@@ -109,7 +109,13 @@
           </div>
           <div class="card-footer justify-content-center">
             <button type="button" class="btn btn-primary btn-link btn-lg btn-save" id="btn-save{{$p->id}}" data-id="{{$p->id}}" data-idcifrado="{{Crypt::encrypt($p->id)}}" style="display: none"><i class="material-icons">send</i> {{ __('Guardar') }}</button>
-            <button type="button" class="btn btn-primary btn-link btn-lg btn-like" data-id="{{$p->id}}"><i class="material-icons">favorite</i> <i>{{$p->likes }} {{ __('ME GUSTA') }}</i></button>
+            @if(strlen($p->like_user) > 1 && in_array(Auth::user()->id,  explode("-", $p->like_user)))
+              <button type="button" class="btn btn-primary btn-link btn-lg btn-like" data-id="{{$p->id}}"><i class="material-icons">favorite</i> <i>{{$p->likes}} {{ __('ME GUSTA') }}</i></button>
+            @elseif(strlen($p->like_user) == 1 && Auth::user()->id == $p->like_user)
+              <button type="button" class="btn btn-primary btn-link btn-lg btn-like" data-id="{{$p->id}}"><i class="material-icons">favorite</i> <i>{{$p->likes}} {{ __('ME GUSTA') }}</i></button>
+            @else
+              <button type="button" class="btn btn-primary btn-link btn-lg btn-like" data-id="{{$p->id}}"><i class="material-icons" style="color: grey">favorite</i> <i>{{$p->likes}} {{ __('ME GUSTA') }}</i></button>
+            @endif
           </div>
         </div>
       </div>

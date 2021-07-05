@@ -252,7 +252,12 @@ function likePost(idPost){
             'X-CSRF-TOKEN': $('input[name=_token]').val()
         },
         success: function (data) {
-            $("#idPub-"+idPost+ " > div > div.card-footer.justify-content-center > button.btn.btn-primary.btn-link.btn-lg.btn-like > i:nth-child(2)")[0].innerText = data+" ME GUSTA";
+            $("#idPub-"+idPost+ " > div > div.card-footer.justify-content-center > button.btn.btn-primary.btn-lg.btn-like > i:nth-child(2)")[0].innerText = data+" ME GUSTA";
+            if(data != '0'){
+                $("#idPub-"+idPost+ " > div > div.card-footer.justify-content-center > button.btn.btn-primary.btn-link.btn-lg.btn-like > i.material-icons")[0].style.color = "#9c27b0";
+            }else{
+                $("#idPub-"+idPost+ " > div > div.card-footer.justify-content-center > button.btn.btn-primary.btn-link.btn-lg.btn-like > i.material-icons")[0].style.color = "grey";
+            }
         },
         error: function () {
             Toast2.fire({
