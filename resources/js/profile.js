@@ -245,21 +245,27 @@ function likePost(idPost){
     $.ajax({
         type: 'POST',
         url: '/likePost',
+        dataType: 'json',
         data: {
             id: idPost
         },
         headers: {
             'X-CSRF-TOKEN': $('input[name=_token]').val()
         },
+        beforeSend: function(){
+            $("#idPub-"+idPost+ "> div > div.card-footer.justify-content-center > button.btn.btn-primary.btn-link.btn-lg.btn-like").attr("disabled",true);
+        },
         success: function (data) {
-            $("#idPub-"+idPost+ " > div > div.card-footer.justify-content-center > button.btn.btn-primary.btn-lg.btn-like > i:nth-child(2)")[0].innerText = data+" ME GUSTA";
-            if(data != '0'){
+            $("#idPub-"+idPost+ "> div > div.card-footer.justify-content-center > button.btn.btn-primary.btn-link.btn-lg.btn-like").attr("disabled",false);
+            $("#idPub-"+idPost+ " > div > div.card-footer.justify-content-center > button.btn.btn-primary.btn-lg.btn-like > i:nth-child(2)")[0].innerText = data[1]+" ME GUSTA";
+            if(data[0]){
                 $("#idPub-"+idPost+ " > div > div.card-footer.justify-content-center > button.btn.btn-primary.btn-link.btn-lg.btn-like > i.material-icons")[0].style.color = "#9c27b0";
             }else{
                 $("#idPub-"+idPost+ " > div > div.card-footer.justify-content-center > button.btn.btn-primary.btn-link.btn-lg.btn-like > i.material-icons")[0].style.color = "grey";
             }
         },
         error: function () {
+            $("#idPub-"+idPost+ "> div > div.card-footer.justify-content-center > button.btn.btn-primary.btn-link.btn-lg.btn-like").attr("disabled",false);
             Toast2.fire({
                 icon: 'error',
                 title: 'error desconocido'
