@@ -38,7 +38,7 @@
               @if($posts["photo"])
                 <img src="{{asset('img/faces/'.$posts["photo"])}}" class="avatar publish" width="100" height="100">
               @else
-                <img src="{{asset('img/faces/cover.jpg')}}" class="avatar publish">
+                <img src="{{asset('img/faces/marc.jpg')}}" class="avatar publish">
               @endif
               <h3 class="card-title"><strong>{{ __('Publicar') }}</strong></h3>
               <div class="social-line">
