@@ -84,6 +84,6 @@ class PostController extends Controller
         $datos->idPost = $request->id;
         $datos->user = Auth::user()->id;
         $response = $api->likePost($datos);
-        return $response->cant;
+        return [$response->like, $response->cant];
     }
 }
